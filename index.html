@@ -22,7 +22,7 @@
             --glass-border: rgba(255, 0, 64, 0.3);
             
             /* Variável para o nome - MUDE AQUI! */
-            --girlfriend-name: "Vanessa"; /* ← COLOQUE O NOME AQUI */
+            --girlfriend-name: "Karine"; /* ← COLOQUE O NOME AQUI */
         }
 
         * {
@@ -703,6 +703,94 @@
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .photo-card-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .photo-card-modal.active {
+            display: flex;
+        }
+
+        .photo-card-content {
+            background: var(--card-black);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-red);
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.3);
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            animation: scaleIn 0.3s ease;
+        }
+
+        .photo-card-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #photoCardCaption {
+            color: var(--white);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            padding: 10px;
+        }
+
+        .close-photo-card {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: var(--white);
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 10000;
+            transition: color 0.3s ease;
+        }
+
+        .close-photo-card:hover {
+            color: var(--accent-red);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Adicione estes estilos no seu CSS */
+        @media (max-width: 480px) {
+            .photo-card-content {
+                width: 95%;
+                padding: 10px;
+            }
+            
+            .photo-card-content img {
+                max-height: 60vh;
+            }
+            
+            #photoCardCaption {
+                font-size: 0.9rem;
+                padding: 5px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -745,35 +833,69 @@
                 <p>Obrigado(a) por ser minha companheira de sonhos, minha parceira de vida, minha melhor amiga e meu grande amor. Neste Dia dos Namorados, quero que saiba: você é tudo que sempre sonhei e muito mais! 💝</p>
             </div>
         </main>
-
-        <section class="photo-gallery">
-            <div class="photo-frame">
-                <img src="img/1.jpeg" alt="Nossa primeira foto juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='📸<br><small>Foto 1</small>';">
+  <section class="photo-gallery">
+            <div class="photo-frame" onclick="photoCardModal('img/img1.jpg', 'Nossa primeira foto juntos')">
+                <img src="img/img1.jpg" alt="Nossa primeira foto juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='📸<br><small>Foto 1</small>';"/>
             </div>
-            <div class="photo-frame">
-                <img src="img/2.jpeg" alt="Momento especial" onerror="this.style.display='none'; this.parentNode.innerHTML='💕<br><small>Foto 2</small>';">
+            <div class="photo-frame" onclick="openPhotoCard('img/img2.jpg', 'Sorriso apaixonado')">
+                <img src="img/img2.jpg" alt="Sorriso apaixonado" onerror="this.style.display='none'; this.parentNode.innerHTML='😊<br><small>Foto 7</small>';"/>
             </div>
-            <div class="photo-frame">
-                <img src="img/3.jpeg" alt="Lembrança querida" onerror="this.style.display='none'; this.parentNode.innerHTML='🌹<br><small>Foto 3</small>';">
+            <div class="photo-frame" onclick="openPhotoCard('img/img8.jpg', 'Passeio inesquecível')">
+                <img src="img/img8.jpg" alt="Passeio inesquecível" onerror="this.style.display='none'; this.parentNode.innerHTML='🚶‍♂️<br><small>Foto 8</small>';"/>
             </div>
-            <div class="photo-frame">
-                <img src="img/4.jpeg" alt="Nosso amor" onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';">
+            <div class="photo-frame" onclick="openPhotoCard('img/img3.jpg', 'Abraço apertado')">
+                <img src="img/img3.jpg" alt="Abraço apertado" onerror="this.style.display='none'; this.parentNode.innerHTML='🤗<br><small>Foto 9</small>';"/>
             </div>
-            <div class="photo-frame">
-                <img src="img/5.jpeg" alt="Momento único" onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';">
+            <div class="photo-frame" onclick="openPhotoCard('img/img15.jpg', 'Olhar apaixonado')">
+                <img src="img/img15.jpg" alt="Olhar apaixonado" onerror="this.style.display='none'; this.parentNode.innerHTML='😍<br><small>Foto 10</small>';"/>
             </div>
-            <div class="photo-frame">
-                <img src="img/6.jpeg" alt="Para sempre" onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';">
+            <div class="photo-frame" onclick="openPhotoCard('img/img4.jpg', 'Dia especial')">
+                <img src="img/img4.jpg" alt="Dia especial" onerror="this.style.display='none'; this.parentNode.innerHTML='🎉<br><small>Foto 11</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img10.jpg', 'Viagem Juntiinhos')">
+                <img src="img/img10.jpg" alt="Viagem Juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='✈️<br><small>Foto 12</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img14.jpg', 'beijinho apaixonado')">
+                <img src="img/img14.jpg" alt="Jantar romântico" onerror="this.style.display='none'; this.parentNode.innerHTML='🍽️<br><small>Foto 13</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img5.jpg', 'Diversão juntos')">
+                <img src="img/img5.jpg" alt="Diversão juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='😄<br><small>Foto 14</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img9.jpg', 'Trilha juntos')">
+                <img src="img/img9.jpg" alt="Trilha juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='🏡<br><small>Foto 15</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img13.jpg', 'Momento especial')">
+                <img src="img/img13.jpg" alt="Momento especial" onerror="this.style.display='none'; this.parentNode.innerHTML='💕<br><small>Foto 2</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img12.jpg', 'bobeiras juntos')">
+                <img src="img/img12.jpg" alt="Bobeiras Juntos" onerror="this.style.display='none'; this.parentNode.innerHTML='🌹<br><small>Foto 3</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img11.jpg', 'Nosso amor')">
+                <img src="img/img11.jpg" alt="Nosso amor" onerror="this.style.display='none'; this.parentNode.innerHTML='✨<br><small>Foto 4</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img7.jpg', 'Momento único')">
+                <img src="img/img7.jpg" alt="Momento único" onerror="this.style.display='none'; this.parentNode.innerHTML='💖<br><small>Foto 5</small>';"/>
+            </div>
+            <div class="photo-frame" onclick="openPhotoCard('img/img6.jpg', 'Para sempre')">
+                <img src="img/img6.jpg" alt="Para sempre" onerror="this.style.display='none'; this.parentNode.innerHTML='🥰<br><small>Foto 6</small>';"/>
             </div>
         </section>
+
+
+
+        <footer class="footer">
+            <p>Você é a razão do meu sorriso, meu amor! 💖</p>
+            <p>Obrigado por ser minha luz e minha alegria! 🌟</p>
+            <p>Eu te Amo! Te amo eternamente! 💞</p>
 
         <footer class="footer">
             <p>Criado com todo <span class="heart-beat">❤️</span> do universo</p>
             <p>Para a <span class="girlfriend-name"></span> mais especial do mundo! 💫</p>
-            <p>Feliz Dia dos Namorados, meu amor! 💑</p>
+            <p>Eu te Amo! 💑</p>
         </footer>
     </div>
 
+    
     <script>
         // Cursor personalizado
         let cursor = document.querySelector('.custom-cursor');
@@ -782,16 +904,7 @@
             cursor.style.left = e.clientX - 10 + 'px';
             cursor.style.top = e.clientY - 10 + 'px';
             
-            // Criar trilha do cursor
-            if (Math.random() > 0.8) {
-                let trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = e.clientX - 3 + 'px';
-                trail.style.top = e.clientY - 3 + 'px';
-                document.body.appendChild(trail);
-                
-                setTimeout(() => trail.remove(), 1000);
-            }
+         
         });
 
         // Partículas vermelhas
@@ -972,51 +1085,7 @@
             }
         }
 
-        // Easter egg: triplo clique
-        let clickCount = 0;
-        let clickTimer;
-        
-        document.addEventListener('click', (e) => {
-            clickCount++;
-            clearTimeout(clickTimer);
-            
-            if (clickCount === 3) {
-                // Ativação do modo ultra dark
-                document.body.style.filter = 'hue-rotate(30deg) saturate(1.8) brightness(1.2)';
-                createHeartExplosion();
-                
-                // Criar texto flutuante
-                const text = document.createElement('div');
-                text.innerHTML = '🔥 MODO DARK ULTRA ATIVADO! 🔥';
-                text.style.cssText = `
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    font-size: 3rem;
-                    font-weight: bold;
-                    background: linear-gradient(45deg, #ff0040, #ffd700);
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: transparent;
-                    background-clip: text;
-                    z-index: 9999;
-                    pointer-events: none;
-                    animation: ultra-text 3s ease-out forwards;
-                    text-shadow: 0 0 20px rgba(255, 0, 64, 0.8);
-                `;
-                document.body.appendChild(text);
-                
-                setTimeout(() => {
-                    text.remove();
-                    document.body.style.filter = '';
-                }, 3000);
-                
-                clickCount = 0;
-            } else {
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                }, 1000);
-            }
+     
             
             // Efeito de clique vermelho
             const ripple = document.createElement('div');
@@ -1035,8 +1104,7 @@
             `;
             document.body.appendChild(ripple);
             setTimeout(() => ripple.remove(), 800);
-        });
-
+        
         // Efeito parallax 3D no mouse
         document.addEventListener('mousemove', (e) => {
             const cards = document.querySelectorAll('.love-card, .photo-frame');
@@ -1387,6 +1455,44 @@
             }
         `;
         document.head.appendChild(extraStyles);
+
+        // Adicione estas funções no seu JavaScript
+function openPhotoCard(src, caption) {
+    const modal = document.getElementById('photoCardModal');
+    const img = document.getElementById('photoCardImg');
+    const captionEl = document.getElementById('photoCardCaption');
+    
+    img.src = src;
+    captionEl.textContent = caption;
+    modal.classList.add('active');
+}
+
+function closePhotoCard() {
+    const modal = document.getElementById('photoCardModal');
+    if(modal) {
+        modal.classList.remove('active');
+    }
+}
+
+// Adicione estes event listeners quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('photoCardModal');
+    const closeBtn = document.querySelector('.close-photo-card');
+    
+    closeBtn.addEventListener('click', closePhotoCard);
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closePhotoCard();
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closePhotoCard();
+        }
+    });
+});
 
         console.log('💖 Site de Amor carregado com sucesso! Feliz Dia dos Namorados! ✨');
     </script>
